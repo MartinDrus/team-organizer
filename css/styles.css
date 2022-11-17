@@ -51,9 +51,18 @@ form > label {
 }
 
 #select-options-box {
-    height: 15vh;
-    width: 80vw;
     height: 5vh;
+    width: 80vw;
+    margin: 0.5em;
 
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.btn-style {
+    width: 5em;
+    border-radius: 5px;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
 }
 

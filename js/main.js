@@ -2,6 +2,8 @@
 let canvas = document.querySelector("#canvas");
 let c = canvas.getContext("2d");
 
+import renderOptions from "./renderOptions.js"
+
 window.addEventListener("resize", evt => {
     console.log("width: "+evt.currentTarget.innerWidth+"  height: "+evt.currentTarget.innerHeight);
 
@@ -9,9 +11,6 @@ window.addEventListener("resize", evt => {
 
 
 // let rawInput = document.querySelector("#size-or-name-input");
-
-
-
 
 // rawInput.addEventListener("input" , (e) => {
 //     console.log(e.target.value);
@@ -29,7 +28,7 @@ function subGroupSize(size){
     if(size >= 4) {
         for (let i = 2; i < size; i++) {
             let subGroup = [];
-            if (this.isPrime(size)) {
+            if (isPrime(size)) {
                 splitLog.isPrime = true;
                 if ((((size-1)/i)-1 > 0)&&(size-1)%i===0) {
                     for (let j = 0; j < i-1; j++) {
@@ -63,15 +62,45 @@ function isPrime(num){
         return num > 1;
 }
 
-let temp = subGroupSize(16);
+let obj = subGroupSize(16);
 
-function calculateAngles(obj) {
-    let chosenGroup = obj.groups[1]
+renderOptions(obj);
+
+
+let groupSizeSelectBTN = document.querySelectorAll(".btn-style");
+groupSizeSelectBTN.forEach(btn => {
+    btn.addEventListener("click", opt => {
+        let chosenGroupSize = parseInt(opt.currentTarget.value);
+        let angleArray = calculateAngles(obj, chosenGroupSize);
+        let colorArray = randomColors(angleArray);
+
+        window.onload = draw(angleArray, colorArray);
+
+
+    })
+})
+
+calculateAngles(obj, obj.size)
+
+function calculateAngles(obj, chosenSize) {
+
+    let chosenGroup = [];
+
+    obj.groups.forEach(opt => {
+        if (opt.length === chosenSize) {
+            chosenGroup = [...opt];
+        } 
+    });
+    if (chosenGroup.length === 0) {
+        for (let i = 0; i < chosenSize; i++) {
+            chosenGroup.push(1);
+        }
+    }
+    console.log(chosenGroup);
     let fractions = 2/obj.size;
     return chosenGroup.map(angle => angle*fractions*Math.PI)
 }
 
-let angleArray = calculateAngles(temp);
 
 function randomColors(array) {
     let colorArray = []
@@ -89,11 +118,12 @@ function randomColors(array) {
     return colorArray;
 }
 
-let colorArray = randomColors(angleArray);
 
 
 
-function draw() {
+function draw(angleArray, colorArray) {
+
+    c.clearRect(0,0,canvas.width, canvas.height)
 
     // Base offset distance of 10
     let offset = 10;
@@ -103,8 +133,6 @@ function draw() {
     let middleX = canvas.width/2;
     let middleY = canvas.height/2;
     let radius = ((canvas.width/2) - offset)
-
-
 
     let colors = Array.from(colorArray)
     let angles = Array.from(angleArray)
@@ -141,5 +169,4 @@ function draw() {
 
   
 
-  window.onload = draw;
 
