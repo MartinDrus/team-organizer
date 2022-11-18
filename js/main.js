@@ -123,7 +123,7 @@ function randomColors(array) {
 
 function draw(angleArray, colorArray) {
 
-    c.clearRect(0,0,canvas.width, canvas.height)
+    c.clearRect(0,0,canvas.width, canvas.height);
 
     // Base offset distance of 10
     let offset = 10;
