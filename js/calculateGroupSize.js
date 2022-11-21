@@ -37,7 +37,7 @@ function calculateGroupSize(size){
                 }   
             }
         }
-    } else console.log("Group to small");
+    }
     return splitLog
 };
 

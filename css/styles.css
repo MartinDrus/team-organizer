@@ -67,3 +67,24 @@ form > label {
     box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
 }
 
+/* #test {
+    width: 150px;
+    height: 150px;
+
+    background-color: black;
+
+    border-radius: 50%;
+
+
+} */
+/*
+#test2 {
+    position: relative;
+
+} */
+
+
+.rotate {
+    transition: 0.5s;
+    transform: rotate(1080deg);
+}

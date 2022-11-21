@@ -1,7 +1,7 @@
 
-function randomColors(array) {
+function randomColors(amountOfNeededColors) {
     let colorArray = [];
-    for (let i = 0; i < array.length; i++) {
+    for (let i = 0; i < amountOfNeededColors; i++) {
 
       let r = Math.floor(Math.random()*200+25);
       let g = Math.floor(Math.random()*200+25);
