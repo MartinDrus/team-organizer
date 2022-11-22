@@ -48,12 +48,15 @@ class PieChart {
           chosenGroup = [...element];
         }
       });
+      this.splitTeam()
     }
     let fractions = 2 / this.groupSplitObj.size;
     return chosenGroup.map((angle) => angle * fractions * Math.PI);
   }
 
-
+  splitTeam(){
+    console.log("afjalsjfl");
+  }
 
 
 }

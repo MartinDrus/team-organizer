@@ -17,8 +17,17 @@ let rawInput = document.querySelector("#size-or-name-input");
 let groupSplitObj = undefined;
 let chosenGroupSize = undefined;
 
-rawInput.addEventListener("input" , (e) => {
-    trigger(e)
+let timeout = null;
+
+rawInput.addEventListener("keyup" , (e) => {
+
+    clearTimeout(timeout);
+
+    // Make a new timeout set to go off in 1000ms (1 second)
+    timeout = setTimeout(() => {
+        console.log(e.target.value);
+        trigger(e)
+    }, 800);
 });
 
 
@@ -50,6 +59,7 @@ groupSizeSelectBTN.addEventListener("click", opt => {
         chosenGroupSize = parseInt(opt.target.value);
         renderChart(chosenGroupSize, groupSplitObj);
         groupSizeSelectBTN.replaceChildren();
+
     });
 
 function renderChart(chosenGroupSize, groupSplitObj){
@@ -57,6 +67,8 @@ function renderChart(chosenGroupSize, groupSplitObj){
     chart.draw();
 
 }
+
+
 
 // let test = document.querySelector("#test");
 // test.addEventListener("click", e => {

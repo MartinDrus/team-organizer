@@ -25,8 +25,18 @@ class PieSlice{
         this.color = color;
     }
 
+    getId(){
+        return this.id;
+    }
+
+    getColor(){
+        return this.color;
+    }
+
 
     draw(){
+        canvas.classList.toggle("rotate");
+
         // The medium angle is the average of two consecutive angles
         this.medianAngle = (this.endAngle + this.beginAngle) / 2;
         
