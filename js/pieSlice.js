@@ -70,13 +70,6 @@ class PieSlice{
         }
     }
 
-
-
-
-
-
-
-
 }
 
 export default PieSlice;

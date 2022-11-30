@@ -12,20 +12,25 @@ import calculateGroupSize from "./calculateGroupSize.js";
 // })
 
 let rawInput = document.querySelector("#size-or-name-input");
-let outputContainer = document.querySelector("#canvas-wrapper");
+let startBtn = document.querySelector("#start-button");
 let randomizeBtn = document.querySelector("#random-btn");
 let groupSizeSelectBTN = document.querySelector("#select-options-box");
 
 let groupSplitObj;
 let chosenGroupSize = undefined;
-let timeout = null;
-
-rawInput.addEventListener("keyup" , (e) => {
-
+let turnsInDegree = 0;
+startBtn.addEventListener("click" , (e) => {
     randomizeBtn.hidden = true;
     c.clearRect(0, 0, canvas.width, canvas.height);
     groupSizeSelectBTN.replaceChildren();
-    canvas.classList.remove("rotate");
+
+    if (turnsInDegree !== 0) {
+        turnsInDegree = 0;
+        canvas.style.transform = `rotate(${turnsInDegree}deg)`;
+    } else {
+        turnsInDegree = 1080;
+        canvas.style.transform = `rotate(${turnsInDegree}deg)`;
+    }
 
 
     groupSplitObj = {
@@ -37,27 +42,24 @@ rawInput.addEventListener("keyup" , (e) => {
         toText: []
     }
 
-    clearTimeout(timeout);
 
-    timeout = setTimeout(() => {
-        if (e.target.value.trim().length >= 1) {
-            trigger(e)
+        if (rawInput.value.trim().length >= 1) {
+            trigger(rawInput.value)
         } 
-    }, 700);
 });
 
 
 
 
-function trigger(e) {
+function trigger(value) {
     
-    if (isNaN(e.target.value)) {
-        clearTimeout(timeout);
+    if (isNaN(value)) {
 
 
-        let rawInput = e.target.value;
-        let nameArray = rawInput.split(/(?:,| )+/);
-        groupSplitObj.nameSplit = [...nameArray];
+        
+        let nameArray = value.split(/(?:,| )+/);
+        let shuffledNameArray = nameArray.sort((a, b) => 0.5 - Math.random());
+        groupSplitObj.nameSplit = [...shuffledNameArray];
         groupSplitObj.size = nameArray.length;
 
 
@@ -65,13 +67,11 @@ function trigger(e) {
         //Elham, Nina, Sophie, Gaby, Tenaw, Hoa, Timur, Hannes, Marco, Ammar, Ahmad, Martin
 
 
-
-
-        timeout = setTimeout(() => {
+  
             groupSplitObj = calculateGroupSize(groupSplitObj);
             renderOptions(groupSplitObj);
             renderChart(0, groupSplitObj);
-        }, 1500);
+       
 
 
 
@@ -95,16 +95,21 @@ function trigger(e) {
 groupSizeSelectBTN.addEventListener("click", opt => {
     groupSizeSelectBTN.replaceChildren();
 
-    canvas.classList.toggle("rotate");
+    console.log();
+    canvas.classList.toggle("rotate-back");
 
     chosenGroupSize = parseInt(opt.target.value);
 
     renderChart(chosenGroupSize, groupSplitObj);
 });
 
-randomizeBtn.addEventListener("click", (evt) => {
+randomizeBtn.addEventListener("click", () => {
+    let randomNumber = Math.floor(Math.random()*3000+800)
+    turnsInDegree += randomNumber;
 
-    canvas.classList.toggle("rotate-back");
+    console.log(turnsInDegree);
+
+    canvas.style.transform = `rotate(${turnsInDegree}deg)`;
 
 });
 
