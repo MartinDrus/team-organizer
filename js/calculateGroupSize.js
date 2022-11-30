@@ -1,14 +1,8 @@
 
 import isPrime from "./helper/isPrime.js";
 
-function calculateGroupSize(size){
-    let splitLog = {
-        size: size,
-        isPrime: false,
-        amountOfGroups: [],
-        groups: [],
-        toText: []
-    }
+function calculateGroupSize(splitLog){
+    let size = splitLog.size;
 
     if(size >= 4) {
         for (let i = 2; i < size; i++) {

@@ -15,6 +15,8 @@ class PieChart {
     c.clearRect(0, 0, canvas.width, canvas.height);
 
     canvas.classList.toggle("rotate");
+    //transform: rotate(1080deg);
+    // canvas.style.transform = "rotate(1080deg)";
 
 
     let angles = this.calculateAngles();
@@ -29,11 +31,16 @@ class PieChart {
 
       beginAngle = endAngle;
       endAngle = endAngle + angles[i];
+      let groupMemberName = null;
+      if (this.groupSplitObj.nameSplit.length > 0) {
+        groupMemberName = this.groupSplitObj.nameSplit[i];
+      }
 
-      let pieSlice = new PieSlice(i + 1, beginAngle, endAngle, color);
+      let pieSlice = new PieSlice(i + 1, groupMemberName,beginAngle, endAngle, color);
 
       pieSlice.draw();
     }
+
   }
 
   calculateAngles() {
@@ -46,16 +53,24 @@ class PieChart {
       this.groupSplitObj.groups.forEach((element) => {
         if (element.length === this.chosenSize) {
           chosenGroup = [...element];
+
+
+
+
         }
       });
-      this.splitTeam()
+      console.log(this.groupSplitObj);
+      console.log(chosenGroup);
+      this.splitTeam(chosenGroup)
     }
     let fractions = 2 / this.groupSplitObj.size;
     return chosenGroup.map((angle) => angle * fractions * Math.PI);
   }
 
-  splitTeam(){
-    console.log("afjalsjfl");
+  splitTeam(chosenGroup){
+
+
+
   }
 
 

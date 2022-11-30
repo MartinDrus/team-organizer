@@ -9,9 +9,10 @@ class PieSlice{
     offsetY;
     medianAngle;
 
-    constructor(id, beginAngle, endAngle, color){
+    constructor(id, name, beginAngle, endAngle, color){
 
         this.id = id;
+        this.name = name;
 
         this.beginAngle = beginAngle;
         this.endAngle = endAngle;
@@ -35,7 +36,7 @@ class PieSlice{
 
 
     draw(){
-        canvas.classList.toggle("rotate");
+        canvas.style.transfrom = ""
 
         // The medium angle is the average of two consecutive angles
         this.medianAngle = (this.endAngle + this.beginAngle) / 2;
@@ -49,18 +50,24 @@ class PieSlice{
         
         // Adding the offsetX and offsetY to the center of the arc
         c.moveTo(this.middleX + this.offsetX, this.middleY + this.offsetY);
-        c.arc(this.middleX + this.offsetX, this.middleY + this.offsetY, this.radius, this.beginAngle, this.endAngle);
+        c.arc(this.middleX + this.offsetX, this.middleY + this.offsetY, this.radius, this.beginAngle, this.endAngle );
         c.lineTo(this.middleX + this.offsetX, this.middleY + this.offsetY);
         c.stroke();
         c.fill();
 
 
         // Set Text
-        let labelX = c.canvas.width / 2 + (this.radius / 2) * Math.cos(this.beginAngle + (this.endAngle - this.beginAngle) / 2);
-        let labelY = c.canvas.height / 2 + (this.radius / 2) * Math.sin(this.beginAngle + (this.endAngle - this.beginAngle) / 2)
+        let labelX = c.canvas.width / 2 + (this.radius / 1.2) * Math.cos(this.beginAngle + (this.endAngle - this.beginAngle) / 2);
+        let labelY = c.canvas.height / 2 + (this.radius / 1.2) * Math.sin(this.beginAngle + (this.endAngle - this.beginAngle) / 2);
+
         c.fillStyle = "white";
         c.font = "bold 20px Arial";
-        c.fillText(`${this.id}`, labelX, labelY);
+
+        if (this.name !== null) {
+            c.fillText(`${this.name}`, labelX-this.offset-20, labelY+this.offset);
+        } else {
+            c.fillText(`${this.id}`, labelX-this.offset, labelY+this.offset);
+        }
     }
 
 

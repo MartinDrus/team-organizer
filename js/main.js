@@ -3,7 +3,6 @@ import PieChart from "./pieChart.js"
 let canvas = document.querySelector("#canvas");
 let c = canvas.getContext("2d");
 
-
 import renderOptions from "./renderOptions.js"
 import randomColors from "./helper/randomColors.js"
 import calculateGroupSize from "./calculateGroupSize.js";
@@ -13,21 +12,38 @@ import calculateGroupSize from "./calculateGroupSize.js";
 // })
 
 let rawInput = document.querySelector("#size-or-name-input");
+let outputContainer = document.querySelector("#canvas-wrapper");
+let randomizeBtn = document.querySelector("#random-btn");
+let groupSizeSelectBTN = document.querySelector("#select-options-box");
 
-let groupSplitObj = undefined;
+let groupSplitObj;
 let chosenGroupSize = undefined;
-
 let timeout = null;
 
 rawInput.addEventListener("keyup" , (e) => {
 
+    randomizeBtn.hidden = true;
+    c.clearRect(0, 0, canvas.width, canvas.height);
+    groupSizeSelectBTN.replaceChildren();
+    canvas.classList.remove("rotate");
+
+
+    groupSplitObj = {
+        size: null,
+        isPrime: false,
+        amountOfGroups: [],
+        nameSplit: [],
+        groups: [],
+        toText: []
+    }
+
     clearTimeout(timeout);
 
-    // Make a new timeout set to go off in 1000ms (1 second)
     timeout = setTimeout(() => {
-        console.log(e.target.value);
-        trigger(e)
-    }, 800);
+        if (e.target.value.trim().length >= 1) {
+            trigger(e)
+        } 
+    }, 700);
 });
 
 
@@ -36,44 +52,70 @@ rawInput.addEventListener("keyup" , (e) => {
 function trigger(e) {
     
     if (isNaN(e.target.value)) {
-        let temp = e.target.value;
-        let nameSplit = temp.split(/(?:,| )+/);
-        groupSplitObj = calculateGroupSize(nameSplit.length);
-        renderChart(0, groupSplitObj);
+        clearTimeout(timeout);
+
+
+        let rawInput = e.target.value;
+        let nameArray = rawInput.split(/(?:,| )+/);
+        groupSplitObj.nameSplit = [...nameArray];
+        groupSplitObj.size = nameArray.length;
+
+
+        //let hardcode = ["Elham", "Nina", "Sophie", "Gaby", "Tenaw", "Hoa", "Timur", "Hannes", "Marco", "Ammar", "Ahmad", "Martin"]
+        //Elham, Nina, Sophie, Gaby, Tenaw, Hoa, Timur, Hannes, Marco, Ammar, Ahmad, Martin
+
+
+
+
+        timeout = setTimeout(() => {
+            groupSplitObj = calculateGroupSize(groupSplitObj);
+            renderOptions(groupSplitObj);
+            renderChart(0, groupSplitObj);
+        }, 1500);
+
+
+
 
     } else {
-        let size = parseInt(e.target.value);
-        groupSplitObj = calculateGroupSize(size);
-        renderChart(0, groupSplitObj);
+
+        groupSplitObj.size = parseInt(e.target.value);
+        if (groupSplitObj.size > 1) {
+            groupSplitObj = calculateGroupSize(groupSplitObj);
+            renderOptions(groupSplitObj);
+            renderChart(0, groupSplitObj);
+        } 
+
 
     }
 
-    if (groupSplitObj !== undefined) {
-        renderOptions(groupSplitObj);
-    }
 }
 
 
-let groupSizeSelectBTN = document.querySelector("#select-options-box");
+    
 groupSizeSelectBTN.addEventListener("click", opt => {
-        chosenGroupSize = parseInt(opt.target.value);
-        renderChart(chosenGroupSize, groupSplitObj);
-        groupSizeSelectBTN.replaceChildren();
+    groupSizeSelectBTN.replaceChildren();
 
-    });
+    canvas.classList.toggle("rotate");
+
+    chosenGroupSize = parseInt(opt.target.value);
+
+    renderChart(chosenGroupSize, groupSplitObj);
+});
+
+randomizeBtn.addEventListener("click", (evt) => {
+
+    canvas.classList.toggle("rotate-back");
+
+});
+
 
 function renderChart(chosenGroupSize, groupSplitObj){
+    randomizeBtn.hidden = false;
     let chart = new PieChart(chosenGroupSize, groupSplitObj);
     chart.draw();
-
 }
 
 
-
-// let test = document.querySelector("#test");
-// test.addEventListener("click", e => {
-//     canvas.classList.toggle("rotate");
-// })
 
 
 
