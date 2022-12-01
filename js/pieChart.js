@@ -40,7 +40,12 @@ class PieChart {
 
       let pieSlice = new PieSlice(i + 1, groupMemberName, beginAngle, endAngle, color);
       pieSlice.draw();
+      
     }
+  }
+
+  stablizeFont(pieSlice, randomize) {
+    pieSlice.stablizeFont(randomize)
   }
 
   calculateAngles() {

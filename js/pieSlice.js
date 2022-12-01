@@ -56,6 +56,16 @@ class PieSlice{
         c.fill();
 
 
+
+        this.drawLabel(false);
+
+
+    }
+
+    drawLabel(randomize) {
+        if (randomize) {
+            c.restore()
+        }
         // Set Text
         let labelX = c.canvas.width / 2 + (this.radius / 1.2) * Math.cos(this.beginAngle + (this.endAngle - this.beginAngle) / 2);
         let labelY = c.canvas.height / 2 + (this.radius / 1.2) * Math.sin(this.beginAngle + (this.endAngle - this.beginAngle) / 2);
@@ -68,6 +78,16 @@ class PieSlice{
         } else {
             c.fillText(`${this.id}`, labelX-this.offset, labelY+this.offset);
         }
+
+
+        c.save();
+c.rotate(0.57);
+// draw your object
+c.restore();
+
+        const degrees = canvas.style.transform;
+
+        console.log(degrees);
     }
 
 }

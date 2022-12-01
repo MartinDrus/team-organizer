@@ -19,7 +19,9 @@ let groupSizeSelectBTN = document.querySelector("#select-options-box");
 let groupSplitObj;
 let chosenGroupSize = undefined;
 let turnsInDegree = 0;
-startBtn.addEventListener("click" , (e) => {
+
+
+startBtn.addEventListener("click" , () => {
     randomizeBtn.hidden = true;
     c.clearRect(0, 0, canvas.width, canvas.height);
     groupSizeSelectBTN.replaceChildren();
@@ -44,7 +46,7 @@ startBtn.addEventListener("click" , (e) => {
 
 
         if (rawInput.value.trim().length >= 1) {
-            trigger(rawInput.value)
+            trigger(rawInput.value);
         } 
 });
 
@@ -68,17 +70,14 @@ function trigger(value) {
 
 
   
-            groupSplitObj = calculateGroupSize(groupSplitObj);
-            renderOptions(groupSplitObj);
-            renderChart(0, groupSplitObj);
+        groupSplitObj = calculateGroupSize(groupSplitObj);
+        renderOptions(groupSplitObj);
+        renderChart(0, groupSplitObj);
        
-
-
-
 
     } else {
 
-        groupSplitObj.size = parseInt(e.target.value);
+        groupSplitObj.size = parseInt(value);
         if (groupSplitObj.size > 1) {
             groupSplitObj = calculateGroupSize(groupSplitObj);
             renderOptions(groupSplitObj);
@@ -95,7 +94,6 @@ function trigger(value) {
 groupSizeSelectBTN.addEventListener("click", opt => {
     groupSizeSelectBTN.replaceChildren();
 
-    console.log();
     canvas.classList.toggle("rotate-back");
 
     chosenGroupSize = parseInt(opt.target.value);
@@ -104,8 +102,8 @@ groupSizeSelectBTN.addEventListener("click", opt => {
 });
 
 randomizeBtn.addEventListener("click", () => {
-    let randomNumber = Math.floor(Math.random()*3000+800)
-    turnsInDegree += randomNumber;
+    //let randomNumber = Math.floor(Math.random()*3000+800)
+    turnsInDegree += turnsInDegree;
 
     console.log(turnsInDegree);
 
