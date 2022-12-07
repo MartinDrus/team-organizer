@@ -18,6 +18,8 @@ let startBtn = document.querySelector("#start-button");
 let randomizeBtn = document.querySelector("#random-btn");
 let groupSizeSelectBTN = document.querySelector("#select-options-box");
 
+let arrow = document.querySelector("#arrow")
+
 let groupSplitObj;
 let chosenGroupSize = undefined;
 let turnsInDegree = 0;
@@ -102,6 +104,7 @@ groupSizeSelectBTN.addEventListener("click", opt => {
 });
 
 randomizeBtn.addEventListener("click", () => {
+    arrow.hidden = false;
     let randomNumber = Math.floor(Math.random()*3000+800)
     turnsInDegree += randomNumber;
 
