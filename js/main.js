@@ -105,7 +105,7 @@ groupSizeSelectBTN.addEventListener("click", opt => {
 
 randomizeBtn.addEventListener("click", () => {
     arrow.hidden = false;
-    let randomNumber = Math.floor(Math.random()*3000+800)
+    let randomNumber = Math.floor(Math.random()*6000+800)
     turnsInDegree += randomNumber;
 
     console.log(turnsInDegree);

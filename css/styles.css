@@ -131,17 +131,15 @@ form > label {
     border-bottom: 20px solid rgb(235, 39, 39);
 }
 
-#random-btn:hover {
 
-}
 
-#random-btn:active {
+/* #random-btn:active {
     transition: 0.2s;
     background-color: rgb(193, 36, 36);
 
     box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
                 inset 2px 2px 3px rgba(0, 0, 0, .6);
-}
+} */
 
 .subgroup-container {
     display: flex;
