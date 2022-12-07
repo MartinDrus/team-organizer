@@ -7,6 +7,8 @@ import renderOptions from "./renderOptions.js"
 import randomColors from "./helper/randomColors.js"
 import calculateGroupSize from "./calculateGroupSize.js";
 
+import PieSlice from "./pieSlice.js"
+
 // window.addEventListener("resize", evt => {
 //     console.log("width: "+evt.currentTarget.innerWidth+"  height: "+evt.currentTarget.innerHeight);
 // })
@@ -88,8 +90,6 @@ function trigger(value) {
     }
 
 }
-
-
     
 groupSizeSelectBTN.addEventListener("click", opt => {
     groupSizeSelectBTN.replaceChildren();
@@ -102,12 +102,20 @@ groupSizeSelectBTN.addEventListener("click", opt => {
 });
 
 randomizeBtn.addEventListener("click", () => {
-    //let randomNumber = Math.floor(Math.random()*3000+800)
-    turnsInDegree += turnsInDegree;
+    let randomNumber = Math.floor(Math.random()*3000+800)
+    turnsInDegree += randomNumber;
 
     console.log(turnsInDegree);
 
+    // let canvasContainer = document.querySelector("#canvas-wrapper");
+
+    console.log();
+
+    // canvasContainer.style.transform = `rotate(${turnsInDegree}deg)`;
+
     canvas.style.transform = `rotate(${turnsInDegree}deg)`;
+
+    PieSlice.prototype.draw(true)
 
 });
 

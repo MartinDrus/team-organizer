@@ -36,6 +36,7 @@ class PieSlice{
 
 
     draw(){
+
         canvas.style.transfrom = ""
 
         // The medium angle is the average of two consecutive angles
@@ -56,19 +57,30 @@ class PieSlice{
         c.fill();
 
 
+        this.drawLabel();
 
-        this.drawLabel(false);
 
 
     }
 
-    drawLabel(randomize) {
-        if (randomize) {
-            c.restore()
-        }
+    drawLabel(deg) {
+
+
+        // console.log(deg);
+        if (deg) {
+
+            ctx.save();
+    ctx.translate(20, 50);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText("java2s.com", 0, 0);
+    ctx.restore();
+
+        } else {
+
         // Set Text
         let labelX = c.canvas.width / 2 + (this.radius / 1.2) * Math.cos(this.beginAngle + (this.endAngle - this.beginAngle) / 2);
         let labelY = c.canvas.height / 2 + (this.radius / 1.2) * Math.sin(this.beginAngle + (this.endAngle - this.beginAngle) / 2);
+
 
         c.fillStyle = "white";
         c.font = "bold 20px Arial";
@@ -80,15 +92,14 @@ class PieSlice{
         }
 
 
-        c.save();
-c.rotate(0.57);
-// draw your object
-c.restore();
 
-        const degrees = canvas.style.transform;
-
-        console.log(degrees);
+  
     }
+
+
+    }
+
+    
 
 }
 
