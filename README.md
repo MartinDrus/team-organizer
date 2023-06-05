@@ -4,7 +4,7 @@ Der Team-Organizer ist ein Tool, mit dem du zufällige Untergruppen erstellen un
 
 ## Anleitung
 
-1. Öffne die `index.html`-Datei in einem Webbrowser oder besuche [https://team-organizer-one.vercel.app/](https://team-organizer-one.vercel.app/).
+1. Öffne die `index.html`-Datei in einem Webbrowser oder besuche <a href="https://team-organizer-one.vercel.app/" target="_blank">Team Organizer</a>.
 
 2. Gib entweder die Gruppengröße in das Eingabefeld ein oder gib die Namen der Teammitglieder durch Leerzeichen oder Kommas getrennt ein.
 
